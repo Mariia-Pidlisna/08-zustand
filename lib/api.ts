@@ -14,7 +14,7 @@ export interface FetchNotesResponse {
 export async function fetchNotes(
   query: string,
   page: number,
-  tag?: Exclude<NoteTag, "All">
+  tag?: Exclude<NoteTag, "all">
 ): Promise<FetchNotesResponse> {
   const params: Record<string, string | number> = {
     page: page,
