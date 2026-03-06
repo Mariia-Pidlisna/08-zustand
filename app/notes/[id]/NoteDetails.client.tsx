@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { useParams, useRouter } from "next/navigation";
+import { useParams } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 import { fetchNoteById } from "@/lib/api";
 import type { Note } from "@/types/note";
@@ -9,7 +9,6 @@ import css from "./NoteDetails.module.css";
 
 export default function NoteDetails() {
   const { id } = useParams<{ id: string }>();
-  const router = useRouter();
   
   const { data: note, isLoading, isError } = useQuery<Note>({
     queryKey: ["note", id],

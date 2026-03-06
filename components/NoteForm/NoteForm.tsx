@@ -9,6 +9,10 @@ import type { NoteTag } from "../../types/note";
 import { useRouter } from "next/navigation";
 import { useNoteDraftStore } from "@/lib/store/noteStore";
 
+interface NoteFormProps {
+  onClose?: () => void;
+}
+
 const tagOptions: NoteTag[] = [
   "Todo",
   "Work",
@@ -23,7 +27,7 @@ export type NewNoteData = {
   tag: NoteTag;
 };
 
-function NoteForm() {
+function NoteForm({ onClose }: NoteFormProps) {
   const router = useRouter();
   const queryClient = useQueryClient();
 
@@ -48,6 +52,7 @@ function NoteForm() {
       toast.success("Note created successfully");
       clearDraft();
       queryClient.invalidateQueries({ queryKey: ["notes"] });
+      if (onClose) onClose();
       router.push("/notes/filter/All");
     },
     onError: () => {
